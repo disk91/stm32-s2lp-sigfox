@@ -17,5 +17,18 @@ C_DEPS :=
 SUBDIRS := \
 Core/Src \
 Drivers/STM32L0xx_HAL_Driver/Src \
+ItSdk/Src/it_sdk/eeprom \
+ItSdk/Src/it_sdk/logger \
+ItSdk/Src/it_sdk/lowpower \
+ItSdk/Src/it_sdk \
+ItSdk/Src/it_sdk/sched \
+ItSdk/Src/it_sdk/statemachine \
+ItSdk/Src/it_sdk/time \
+ItSdk/Src/stm32l_sdk/adc \
+ItSdk/Src/stm32l_sdk \
+ItSdk/Src/stm32l_sdk/eeprom \
+ItSdk/Src/stm32l_sdk/lowpower \
+ItSdk/Src/stm32l_sdk/rtc \
+ItSdk/Src/stm32l_sdk/wdg \
 startup \
 

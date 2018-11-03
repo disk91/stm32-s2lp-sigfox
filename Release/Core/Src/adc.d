@@ -34,7 +34,8 @@ Core/Src/adc.o: ../Core/Src/adc.c \
  C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h \
  C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h \
  C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h \
- C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h
+ C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h \
+ C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/gpio.h
 
 C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/adc.h:
 
@@ -107,3 +108,5 @@ C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Drivers/STM32L0xx_HAL_Driver/In
 C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h:
 
 C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h:
+
+C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/gpio.h:

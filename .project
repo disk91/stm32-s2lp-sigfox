@@ -25,6 +25,10 @@
 		<nature>fr.ac6.mcu.ide.core.MCUProjectNature</nature>
 	</natures>
 	<linkedResources>
-		
+		<link>
+			<name>ItSdk</name>
+			<type>2</type>
+			<location>PARENT-1-PROJECT_LOC/ItSdk</location>
+		</link>
 	</linkedResources>
 </projectDescription>

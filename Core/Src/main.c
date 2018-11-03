@@ -48,7 +48,9 @@
 #include "gpio.h"
 
 /* USER CODE BEGIN Includes */
-
+#include <it_sdk/itsdk.h>
+#include <it_sdk/logger/logger.h>
+#include <it_sdk/config.h>
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -106,21 +108,18 @@ int main(void)
   MX_USART2_UART_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-
+  itsdk_setup();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint8_t led = GPIO_PIN_SET;
   while (1)
   {
 
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-	  led = (led==GPIO_PIN_SET)?GPIO_PIN_RESET:GPIO_PIN_SET;
-	  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin,led);
-	  HAL_Delay(50);
+	  itsdk_loop();
   }
   /* USER CODE END 3 */
 
@@ -202,6 +201,9 @@ void SystemClock_Config(void)
 void _Error_Handler(char *file, int line)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
+  #if ITSDK_LOGGER_CONF > 0
+   log_debug("Error : %s (%d)\r\n",file,line);
+  #endif
   /* User can add his own implementation to report the HAL error return state */
   while(1)
   {

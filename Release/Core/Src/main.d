@@ -41,7 +41,13 @@ Core/Src/main.o: ../Core/Src/main.c \
  C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/rtc.h \
  C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/spi.h \
  C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/tim.h \
- C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/gpio.h
+ C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/gpio.h \
+ C:/Users/paul/Documents/STM32/ItSdk/Inc/it_sdk/itsdk.h \
+ C:/Users/paul/Documents/STM32/ItSdk/Inc/it_sdk/wrappers.h \
+ C:/Users/paul/Documents/STM32/ItSdk/Inc/it_sdk/logger/logger.h \
+ C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/it_sdk/config.h \
+ C:/Users/paul/Documents/STM32/ItSdk/Inc/it_sdk/config_defines.h \
+ C:/Users/paul/Documents/STM32/ItSdk/Inc/stm32l_sdk/config.h
 
 C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/main.h:
 
@@ -128,3 +134,15 @@ C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/spi.h:
 C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/tim.h:
 
 C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/gpio.h:
+
+C:/Users/paul/Documents/STM32/ItSdk/Inc/it_sdk/itsdk.h:
+
+C:/Users/paul/Documents/STM32/ItSdk/Inc/it_sdk/wrappers.h:
+
+C:/Users/paul/Documents/STM32/ItSdk/Inc/it_sdk/logger/logger.h:
+
+C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/it_sdk/config.h:
+
+C:/Users/paul/Documents/STM32/ItSdk/Inc/it_sdk/config_defines.h:
+
+C:/Users/paul/Documents/STM32/ItSdk/Inc/stm32l_sdk/config.h:

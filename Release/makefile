@@ -9,6 +9,19 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include startup/subdir.mk
+-include ItSdk/Src/stm32l_sdk/wdg/subdir.mk
+-include ItSdk/Src/stm32l_sdk/rtc/subdir.mk
+-include ItSdk/Src/stm32l_sdk/lowpower/subdir.mk
+-include ItSdk/Src/stm32l_sdk/eeprom/subdir.mk
+-include ItSdk/Src/stm32l_sdk/adc/subdir.mk
+-include ItSdk/Src/stm32l_sdk/subdir.mk
+-include ItSdk/Src/it_sdk/time/subdir.mk
+-include ItSdk/Src/it_sdk/statemachine/subdir.mk
+-include ItSdk/Src/it_sdk/sched/subdir.mk
+-include ItSdk/Src/it_sdk/lowpower/subdir.mk
+-include ItSdk/Src/it_sdk/logger/subdir.mk
+-include ItSdk/Src/it_sdk/eeprom/subdir.mk
+-include ItSdk/Src/it_sdk/subdir.mk
 -include Drivers/STM32L0xx_HAL_Driver/Src/subdir.mk
 -include Core/Src/subdir.mk
 -include subdir.mk
