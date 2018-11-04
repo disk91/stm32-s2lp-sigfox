@@ -38,6 +38,7 @@
 #define ITSDK_WITH_UART				( __UART_USART2 | __UART_LPUART1 )		// Use LPUART1 and USART2 for debug
 #define ITSDK_WITH_RTC				__RTC_ENABLED							// The Rtc is usd in the firmware
 #define ITSDK_WITH_ADC				__ADC_ENABLED							// Use of Adc (includes the structures)
+#define ITSDK_WITH_SPI				__SPI_ENABLED							// Use SPI (inludes the strutures)
 #define ITSDK_ADC1_PIN				15										// Map the channel for ADC on PIN 7
 #define ITSDK_VDD_MV				3300									// VDD value in cV
 #define ITSDK_WITH_CLK_ADJUST		0										// The RTC (and wtachdog) is calibrated
@@ -73,10 +74,17 @@
 #define ITSDK_STATEMACHINE_TASKS	0										// Maximum number of state machine task (0 will deactivate STM code)
 #define ITSDK_STATEMACHINE_NAMESZ	8										// Maximum size for task name (-1)
 
+#define ITSDK_WITH_SIGFOX_LIB		1										// Include the sigfox code when 1 disabled when 0
+#define ITSDK_SIGFOX_LIB			__SIGFOX_S2LP							// Type of Sigfox module
+
+
 #if ITSDK_PLATFORM == __PLATFORM_STM32L0x1  || ITSDK_PLATFORM == __PLATFORM_STM32L0x3
 	#include <stm32l_sdk/config.h>
 	#include "stm32l0xx_hal.h"
 #endif
 
+#if ITSDK_WITH_SIGFOX_LIB == 1
+	#include <it_sdk/configSigfox.h>
+#endif
 
 #endif /* IT_SDK_CONFIG_H_ */
