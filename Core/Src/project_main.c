@@ -33,6 +33,8 @@
 #include <it_sdk/sched/scheduler.h>
 #include <it_sdk/statemachine/statemachine.h>
 #include <it_sdk/eeprom/eeprom.h>
+#include <drivers/s2lp/s2lp.h>
+#include <drivers/eeprom/m95640/m95640.h>
 
 
 void loadConfig() {
@@ -73,6 +75,36 @@ void project_setup() {
 	log_info("Booting \r\n");
 	HAL_Delay(2000);
 	loadConfig();
+	eeprom_m95640_hwInit();
+	s2lp_hwInit();
+
+	eeprom_m95640_init(&ITSDK_DRIVERS_M95640_SPI);
+
+	s2lp_config_t s2lpConf;
+	s2lp_eprom_config_t eepromConf1;
+	s2lp_eprom_offset_t eepromConf2;
+
+	eeprom_m95640_read(&ITSDK_DRIVERS_M95640_SPI,0x0000, 32, (uint8_t *)&eepromConf1);
+	eeprom_m95640_read(&ITSDK_DRIVERS_M95640_SPI,0x0021, 4, (uint8_t *)&eepromConf2);
+
+	s2lp_loadConfigFromEeprom(
+			&eepromConf1,
+			&eepromConf2,
+			&s2lpConf
+	);
+	log_info("band: %d\r\n",s2lpConf.band);
+	log_info("offset: 0x%X\r\n",s2lpConf.offset);
+	log_info("range: %d\r\n",s2lpConf.range);
+	log_info("tcxo: %d\r\n",s2lpConf.tcxo);
+	log_info("freq: %d\r\n",s2lpConf.xtalFreq);
+
+	s2lp_init();
+	s2lp_applyConfig(s2lpConf);
+
+
+	while(1){
+		wdg_refresh();
+	}
 
 	itdt_sched_registerSched(2000,ITSDK_SCHED_CONF_IMMEDIATE, &task);
 }

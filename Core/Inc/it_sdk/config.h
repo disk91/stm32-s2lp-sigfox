@@ -39,7 +39,7 @@
 #define ITSDK_WITH_RTC				__RTC_ENABLED							// The Rtc is usd in the firmware
 #define ITSDK_WITH_ADC				__ADC_ENABLED							// Use of Adc (includes the structures)
 #define ITSDK_WITH_SPI				__SPI_ENABLED							// Use SPI (inludes the strutures)
-#define ITSDK_ADC1_PIN				15										// Map the channel for ADC on PIN 7
+#define ITSDK_ADC1_PIN				14										// Map the channel for ADC on PIN 14 (PA0)
 #define ITSDK_VDD_MV				3300									// VDD value in cV
 #define ITSDK_WITH_CLK_ADJUST		0										// The RTC (and wtachdog) is calibrated
 #define ITSDK_CLK_CORRECTION		-41										// remove 41 o/oo of the ticks
@@ -86,5 +86,7 @@
 #if ITSDK_WITH_SIGFOX_LIB == 1
 	#include <it_sdk/configSigfox.h>
 #endif
+
+#include <it_sdk/configDrivers.h>
 
 #endif /* IT_SDK_CONFIG_H_ */

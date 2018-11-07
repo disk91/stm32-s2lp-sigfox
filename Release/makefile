@@ -25,6 +25,7 @@ RM := rm -rf
 -include ItSdk/Src/it_sdk/eeprom/subdir.mk
 -include ItSdk/Src/it_sdk/subdir.mk
 -include ItSdk/Src/drivers/s2lp/subdir.mk
+-include ItSdk/Src/drivers/eeprom/m95640/subdir.mk
 -include Drivers/STM32L0xx_HAL_Driver/Src/subdir.mk
 -include Core/Src/subdir.mk
 -include subdir.mk
@@ -50,7 +51,7 @@ all: STM32_Sigfox_ItSdk.elf
 STM32_Sigfox_ItSdk.elf: $(OBJS) $(USER_OBJS) ../STM32L053R8Tx_FLASH.ld
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU GCC Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -specs=nosys.specs -specs=nano.specs -T"../STM32L053R8Tx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "STM32_Sigfox_ItSdk.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
+	arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -L"C:\Users\paul\Documents\STM32\STM32_Sigfox_ItSdk\Drivers" -specs=nosys.specs -specs=nano.specs -T"../STM32L053R8Tx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "STM32_Sigfox_ItSdk.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build

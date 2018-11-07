@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS :=
+LIBS := -lST_RF_LIB_ALL250_CM0+_GCC
 

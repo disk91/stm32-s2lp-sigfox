@@ -48,7 +48,8 @@ Core/Src/main.o: ../Core/Src/main.c \
  C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/it_sdk/config.h \
  C:/Users/paul/Documents/STM32/ItSdk/Inc/it_sdk/config_defines.h \
  C:/Users/paul/Documents/STM32/ItSdk/Inc/stm32l_sdk/config.h \
- C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/it_sdk/configSigfox.h
+ C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/it_sdk/configSigfox.h \
+ C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/it_sdk/configDrivers.h
 
 C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/main.h:
 
@@ -149,3 +150,5 @@ C:/Users/paul/Documents/STM32/ItSdk/Inc/it_sdk/config_defines.h:
 C:/Users/paul/Documents/STM32/ItSdk/Inc/stm32l_sdk/config.h:
 
 C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/it_sdk/configSigfox.h:
+
+C:/Users/paul/Documents/STM32/STM32_Sigfox_ItSdk/Core/Inc/it_sdk/configDrivers.h:

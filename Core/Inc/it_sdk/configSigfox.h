@@ -20,7 +20,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  * ----------------------------------------------------------
- * 
+ * S2LP:
+ *    In cube MX declare the CSn and SDN pin as output.
+ *      CSn is pullup set to High initially
+ *      SDN is set to low initially (no shutdown)
+ *    Declare SPI. default configuration normally match.
  *
  * ==========================================================
  */
@@ -47,10 +51,20 @@
 																		   //  first bit msb, CRC disable...
 
 #define ITSDK_S2LP_CS_BANK			 __BANK_A							   // S2LP Chip Select PIN LAYOUT (Activ Low)
-#define ITSDK_S2LP_CS_PIN			 __LP_GPIO_8
+#define ITSDK_S2LP_CS_PIN			 __LP_GPIO_1
+#define ITSDK_S2LP_SDN_BANK			 __BANK_A							   // S2LP Chip Shutdown PIN LAYOUT (Activ High)
+#define ITSDK_S2LP_SDN_PIN			 __LP_GPIO_8
 #define ITSDK_S2LP_INT_BANK			 __BANK_C							   // S2LP Interrupt PIN LAYOUT
 #define ITSDK_S2LP_INT_PIN			 __LP_GPIO_0						   //   Default PC0 <=> GPIO3 on S2LP
 																		   //   Configured as Falling
+
+#define ITSDK_S2LP_CNF_TCX0			__S2LP_W_O_TCXO					   	   // Absence of a TCXO
+#define ITSDK_S2LP_CNF_RANGE		0
+#define ITSDK_S2LP_CNF_BAND			3
+#define ITSDK_S2LP_CNF_FREQ			50000000
+#define ITSDK_S2LP_CNF_OFFSET		0
+
+
 #endif //__SIGFOX_S2LP
 // +-------------OTHERS------------|--------------------------------------|---------------------------------------|
 
