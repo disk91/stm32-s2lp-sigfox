@@ -99,7 +99,7 @@ void project_setup() {
 	log_info("freq: %d\r\n",s2lpConf.xtalFreq);
 
 	s2lp_init();
-	s2lp_applyConfig(s2lpConf);
+	s2lp_applyConfig(&s2lpConf);
 
 
 	while(1){

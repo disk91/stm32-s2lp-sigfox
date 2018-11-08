@@ -52,10 +52,18 @@
 
 #define B1_Pin GPIO_PIN_13
 #define B1_GPIO_Port GPIOC
+#define S2LP_GP3_Pin GPIO_PIN_0
+#define S2LP_GP3_GPIO_Port GPIOC
+#define S2LP_GP0_Pin GPIO_PIN_0
+#define S2LP_GP0_GPIO_Port GPIOA
 #define S2LP_CSn_Pin GPIO_PIN_1
 #define S2LP_CSn_GPIO_Port GPIOA
+#define S2LP_GP1_Pin GPIO_PIN_4
+#define S2LP_GP1_GPIO_Port GPIOA
 #define LD2_Pin GPIO_PIN_5
 #define LD2_GPIO_Port GPIOA
+#define S2LP_GP2_Pin GPIO_PIN_0
+#define S2LP_GP2_GPIO_Port GPIOB
 #define S2LP_SDN_Pin GPIO_PIN_8
 #define S2LP_SDN_GPIO_Port GPIOA
 #define M95640_CSn_Pin GPIO_PIN_4

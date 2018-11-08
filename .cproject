@@ -179,6 +179,7 @@
 								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.1603934495" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="../STM32L053R8Tx_FLASH.ld" valueType="string"/>
 								<option id="gnu.c.link.option.libs.881470087" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
 									<listOptionValue builtIn="false" value="ST_RF_LIB_ALL250_CM0+_GCC"/>
+									<listOptionValue builtIn="false" value="ID_KEY_RETRIEVER250_CM0+_GCC"/>
 								</option>
 								<option id="gnu.c.link.option.paths.1833067100" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Drivers}&quot;"/>

@@ -71,7 +71,6 @@ void MX_SPI1_Init(void)
 
 }
 
-
 void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle)
 {
 
