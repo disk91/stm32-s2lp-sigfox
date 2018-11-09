@@ -34,8 +34,9 @@
 #include <it_sdk/statemachine/statemachine.h>
 #include <it_sdk/eeprom/eeprom.h>
 #include <drivers/s2lp/s2lp.h>
+#include <drivers/sigfox/sigfox_helper.h>
 #include <drivers/eeprom/m95640/m95640.h>
-
+#include <drivers/sigfox/sigfox_api.h>
 
 void loadConfig() {
 	log_debug("In loadConfig \r\n");
@@ -73,36 +74,31 @@ void task() {
 void project_setup() {
 	log_init(ITSDK_LOGGER_CONF);
 	log_info("Booting \r\n");
+	// reboot cause
+	log_info("Reset : %d\r\n",itsdk_getResetCause());
+	itsdk_cleanResetCause();
+
 	HAL_Delay(2000);
 	loadConfig();
 	eeprom_m95640_hwInit();
 	s2lp_hwInit();
 
 	eeprom_m95640_init(&ITSDK_DRIVERS_M95640_SPI);
+	s2lp_init();
 
 	s2lp_config_t s2lpConf;
-	s2lp_eprom_config_t eepromConf1;
-	s2lp_eprom_offset_t eepromConf2;
+	s2lp_loadConfiguration(&s2lpConf);
+	s2lp_printConfig(&s2lpConf);
 
-	eeprom_m95640_read(&ITSDK_DRIVERS_M95640_SPI,0x0000, 32, (uint8_t *)&eepromConf1);
-	eeprom_m95640_read(&ITSDK_DRIVERS_M95640_SPI,0x0021, 4, (uint8_t *)&eepromConf2);
+	sigfox_init(&s2lpConf);
 
-	s2lp_loadConfigFromEeprom(
-			&eepromConf1,
-			&eepromConf2,
-			&s2lpConf
-	);
-	log_info("band: %d\r\n",s2lpConf.band);
-	log_info("offset: 0x%X\r\n",s2lpConf.offset);
-	log_info("range: %d\r\n",s2lpConf.range);
-	log_info("tcxo: %d\r\n",s2lpConf.tcxo);
-	log_info("freq: %d\r\n",s2lpConf.xtalFreq);
-
-	s2lp_init();
-	s2lp_applyConfig(&s2lpConf);
-
+	uint8_t f[12] = { 0,1,2,3,4,5,6,7,8,9,10,11 };
+	uint8_t r[8];
+	SIGFOX_API_send_frame(f,4,r,3,0);
 
 	while(1){
+		log_info(".");
+		itsdk_delayMs(1000);
 		wdg_refresh();
 	}
 

@@ -81,6 +81,19 @@
 #define ITSDK_SIGFOX_NVM_BASEADDR	0x600									// Base address in the NVM
 #define ITSDK_SIGFOX_ENCRYPTED		0										// Is the sigfox payload encrypted ?
 #define ITSDK_SIGFOX_LOWPOWER		0										// When 1 the device can be switch to low power by the sigfox lib
+#define ITSDK_SIGFOX_ID				0x00000000								// The device ID when NVM_SOURCE is HEADERS
+#define ITSDK_SIGFOX_PAC			{ 0x00, 0x00, 0x00, 0x00, \
+									  0x00, 0x00, 0x00, 0x00 }				// The device PAC when NVM_SOURCE is HEADERS
+#define ITDSK_SIGFOX_RCZ			0x1										// The default RCZ when NVM_SOURCE is HEADERS
+#define IDTSK_SIGFOX_KEY			{ 0x00, 0x00, 0x00, 0x00, \
+									  0x00, 0x00, 0x00, 0x00, \
+									  0x00, 0x00, 0x00, 0x00, \
+									  0x00, 0x00, 0x00, 0x00 }				// The device KEY when NVM_SOURCE is HEADERS
+#define IDTSK_SIGFOX_AUX			{ 0x00, 0x00, 0x00, 0x00, \
+									  0x00, 0x00, 0x00, 0x00, \
+									  0x00, 0x00, 0x00, 0x00, \
+									  0x00, 0x00, 0x00, 0x00 }				// The device AUX when NVM_SOURCE is HEADERS
+
 
 #endif
 // +-------------OTHERS------------|--------------------------------------|---------------------------------------|

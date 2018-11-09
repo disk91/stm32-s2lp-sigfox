@@ -19,6 +19,15 @@ Clone this repository and open it with AC6 environment [See here on how to insta
 
 Clone the [STM32 ItSdk repository](https://github.com/ingeniousthings/stm32-it-sdk) in the Project root directory to add the needed sdk dependencies.
 
+# CubeMx configuration
+
+The Cube MX configuration is provided in the project.
+Some important key point for custom confguration
+- EXTI interrupt needs to be activated
+- S2LP/GPIO3 -> PC0 have a pull-up 
+
+
+
 # License
 
 This code and ItSdk are under GPLv3. You can use it freely, you can modify, redistribute but *you must* to publish your source code. Other licenses can be obtained by contacting me on [disk91.com](https://www.disk91.com)

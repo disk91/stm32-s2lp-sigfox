@@ -19,6 +19,7 @@ Core/Src \
 Drivers/STM32L0xx_HAL_Driver/Src \
 ItSdk/Src/drivers/eeprom/m95640 \
 ItSdk/Src/drivers/s2lp \
+ItSdk/Src/drivers/sigfox \
 ItSdk/Src/it_sdk/eeprom \
 ItSdk/Src/it_sdk/logger \
 ItSdk/Src/it_sdk/lowpower \

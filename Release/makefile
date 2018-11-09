@@ -24,6 +24,7 @@ RM := rm -rf
 -include ItSdk/Src/it_sdk/logger/subdir.mk
 -include ItSdk/Src/it_sdk/eeprom/subdir.mk
 -include ItSdk/Src/it_sdk/subdir.mk
+-include ItSdk/Src/drivers/sigfox/subdir.mk
 -include ItSdk/Src/drivers/s2lp/subdir.mk
 -include ItSdk/Src/drivers/eeprom/m95640/subdir.mk
 -include Drivers/STM32L0xx_HAL_Driver/Src/subdir.mk

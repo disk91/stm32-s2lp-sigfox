@@ -52,8 +52,10 @@
 
 #define B1_Pin GPIO_PIN_13
 #define B1_GPIO_Port GPIOC
+#define B1_EXTI_IRQn EXTI4_15_IRQn
 #define S2LP_GP3_Pin GPIO_PIN_0
 #define S2LP_GP3_GPIO_Port GPIOC
+#define S2LP_GP3_EXTI_IRQn EXTI0_1_IRQn
 #define S2LP_GP0_Pin GPIO_PIN_0
 #define S2LP_GP0_GPIO_Port GPIOA
 #define S2LP_CSn_Pin GPIO_PIN_1
