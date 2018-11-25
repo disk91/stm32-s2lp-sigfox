@@ -1,11 +1,11 @@
 /* ==========================================================
  * project_main.c - 
- * Project : IngeniousThings SDK
+ * Project : Disk91 SDK
  * ----------------------------------------------------------
  * Created on: 6 sept. 2018
  *     Author: Paul Pinault aka Disk91
  * ----------------------------------------------------------
- * Copyright (C) 2018  IngeniousThings and Disk91
+ * Copyright (C) 2018 Disk91
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU LESSER General Public License as published by
@@ -92,15 +92,23 @@ void project_setup() {
 
 	sigfox_init(&s2lpConf);
 
-	uint8_t f[12] = { 0,1,2,3,4,5,6,7,8,9,10,11 };
-	uint8_t r[8];
-	SIGFOX_API_send_frame(f,4,r,3,0);
 
-	while(1){
-		log_info(".");
-		itsdk_delayMs(1000);
-		wdg_refresh();
+	uint8_t f[12] = { 0,1,2,3,4,5,6,7,8,9,10,11 };
+	uint8_t r[8] = {0};
+	uint16_t ret = SIGFOX_API_send_frame(f,4,r,2,1);
+	log_info("ret : [");
+	for (int i=0 ; i < 8 ; i++) {
+		log_info("%02X ",r[i]);
 	}
+	log_info(" ]\r\n");
+	log_info("Returned code : %04X\r\n",ret);
+
+//	while(1){
+//		log_info(".");
+//		itsdk_delayMs(1000);
+//		wdg_refresh();
+//	}
+
 
 	itdt_sched_registerSched(2000,ITSDK_SCHED_CONF_IMMEDIATE, &task);
 }

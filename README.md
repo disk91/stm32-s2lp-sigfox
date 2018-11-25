@@ -17,7 +17,7 @@ The project have different tag for the different step of realization.
 
 Clone this repository and open it with AC6 environment [See here on how to install it](https://www.disk91.com/2018/technology/hardware/getting-started-with-nucleo32-stm32l031/)
 
-Clone the [STM32 ItSdk repository](https://github.com/ingeniousthings/stm32-it-sdk) in the Project root directory to add the needed sdk dependencies.
+Clone the [STM32 ItSdk repository](https://github.com/disk91/stm32-it-sdk) in the Project root directory to add the needed sdk dependencies.
 
 # CubeMx configuration
 
