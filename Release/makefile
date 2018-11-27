@@ -10,6 +10,7 @@ RM := rm -rf
 -include sources.mk
 -include startup/subdir.mk
 -include ItSdk/Src/stm32l_sdk/wdg/subdir.mk
+-include ItSdk/Src/stm32l_sdk/timer/subdir.mk
 -include ItSdk/Src/stm32l_sdk/spi/subdir.mk
 -include ItSdk/Src/stm32l_sdk/rtc/subdir.mk
 -include ItSdk/Src/stm32l_sdk/lowpower/subdir.mk

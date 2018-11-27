@@ -59,5 +59,6 @@
 "ItSdk/Src/stm32l_sdk/rtc/rtc.o"
 "ItSdk/Src/stm32l_sdk/rtc/systick.o"
 "ItSdk/Src/stm32l_sdk/spi/spi.o"
+"ItSdk/Src/stm32l_sdk/timer/timer.o"
 "ItSdk/Src/stm32l_sdk/wdg/watchdog.o"
 "startup/startup_stm32l053xx.o"

@@ -34,6 +34,7 @@ ItSdk/Src/stm32l_sdk/eeprom \
 ItSdk/Src/stm32l_sdk/lowpower \
 ItSdk/Src/stm32l_sdk/rtc \
 ItSdk/Src/stm32l_sdk/spi \
+ItSdk/Src/stm32l_sdk/timer \
 ItSdk/Src/stm32l_sdk/wdg \
 startup \
 

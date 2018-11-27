@@ -38,13 +38,21 @@
 #define ITSDK_RAM_SIZE				2048									// RAM Memory size
 #define ITSDK_WITH_UART				( __UART_USART2 | __UART_LPUART1 )		// Use LPUART1 and USART2 for debug
 #define ITSDK_WITH_RTC				__RTC_ENABLED							// The Rtc is usd in the firmware
+#define ITSDK_WITH_CLK_ADJUST		1										// The RTC (and wtachdog) is calibrated
+#define ITSDK_CLK_CORRECTION		1200									// correct clock with 1200 o/oo (+20%) of the ticks (used when clk_adjust = 0)
 #define ITSDK_WITH_ADC				__ADC_ENABLED							// Use of Adc (includes the structures)
-#define ITSDK_WITH_SPI				__SPI_ENABLED							// Use SPI (inludes the strutures)
 #define ITSDK_ADC1_PIN				14										// Map the channel for ADC on PIN 14 (PA0)
 #define ITSDK_VDD_MV				3300									// VDD value in cV
-#define ITSDK_WITH_CLK_ADJUST		0										// The RTC (and wtachdog) is calibrated
-#define ITSDK_CLK_CORRECTION		-41										// remove 41 o/oo of the ticks
+#define ITSDK_WITH_SPI				__SPI_ENABLED							// Use SPI (inludes the strutures)
+#define ITSDK_WITH_HW_TIMER			__TIMER_ENABLED							// Use Hardware Timer
+#define ITSDK_HW_TIMER1_HANDLE		htim21									// Timer handler to be used as primary timer
+#define ITSDK_HW_TIMER1_ID			21										// Timer hadware 1 - id/name
+#define ITSDK_HW_TIMER1_FREQ		16000000								// Primary timer base frequency
+#define ITSDK_HW_TIMER1_MAX			65536									// Timer's counter max value ( 2^size )
+#define ITSDK_TIMER_SLOTS			2										// Maximum number of SOFT TIMER available in parallel - 0 disable SOFT TIMER code
 #define ITSDK_WDG_MS				16000									// WatchDog time out in ms 1 --> 28000 / 0 to disable
+#define ITSDK_WDG_CLKFREQ			37000									//  Watchdog clock source frequency
+
 #define ITSDK_LOGGER_CONF			0x0070									// error->info level on serial1 => USART2 (see logger.c)
 #define ITSDK_LOGGER_MODULE			( \
 									  __LOG_MOD_STIMER \
@@ -85,8 +93,6 @@
 #define ITSDK_SHEDULER_TASKS		1										// Maximum number of Task (0 will deactivate scheduler code)
 #define ITSDK_STATEMACHINE_TASKS	0										// Maximum number of state machine task (0 will deactivate STM code)
 #define ITSDK_STATEMACHINE_NAMESZ	8										// Maximum size for task name (-1)
-
-#define ITSDK_TIMER_SLOTS			2										// Maximum number of soft Timer available in parallel - 0 disable timer code
 
 #define ITSDK_WITH_SIGFOX_LIB		1										// Include the sigfox code when 1 disabled when 0
 #define ITSDK_SIGFOX_LIB			__SIGFOX_S2LP							// Type of Sigfox module

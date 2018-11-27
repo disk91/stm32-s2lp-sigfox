@@ -38,6 +38,9 @@
 #include <drivers/eeprom/m95640/m95640.h>
 #include <drivers/sigfox/sigfox_api.h>
 
+
+#include <it_sdk/time/timer.h>
+
 void loadConfig() {
 	log_debug("In loadConfig \r\n");
 
@@ -79,6 +82,7 @@ void project_setup() {
 	itsdk_cleanResetCause();
 
 	HAL_Delay(2000);
+
 	loadConfig();
 	eeprom_m95640_hwInit();
 	s2lp_hwInit();
@@ -103,11 +107,11 @@ void project_setup() {
 	log_info(" ]\r\n");
 	log_info("Returned code : %04X\r\n",ret);
 
-//	while(1){
-//		log_info(".");
-//		itsdk_delayMs(1000);
-//		wdg_refresh();
-//	}
+	while(1){
+		log_info(".");
+		itsdk_delayMs(1000);
+		wdg_refresh();
+	}
 
 
 	itdt_sched_registerSched(2000,ITSDK_SCHED_CONF_IMMEDIATE, &task);

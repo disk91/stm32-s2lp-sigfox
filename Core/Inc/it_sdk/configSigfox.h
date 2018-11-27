@@ -76,7 +76,7 @@
 #endif //__SIGFOX_S2LP
 // +------------SIGFOX-------------|--------------------------------------|---------------------------------------|
 #if ITSDK_WITH_SIGFOX_LIB == 1
-#define ITSDK_SIGFOX_MEM_SIZE		500										// Static memory allocated to sigfox
+#define ITSDK_SIGFOX_MEM_SIZE		256										// Static memory allocated to sigfox
 #define ITSDK_SIGFOX_NVM_SOURCE		__SFX_NVM_M95640						// where the non volatile information are stored
 #define ITSDK_SIGFOX_NVM_BASEADDR	0x600									// Base address in the NVM for sigfox lib
 #define ITSDK_SIGFOX_NVM_IDBASEADDR	0x200									// Base address in the NVM for EncUtils lib
