@@ -84,6 +84,9 @@ void project_setup() {
 	HAL_Delay(2000);
 
 	loadConfig();
+
+	log_info("temp : %d\r\n",(int)adc_getTemperature());
+
 	eeprom_m95640_hwInit();
 	s2lp_hwInit();
 
@@ -92,6 +95,8 @@ void project_setup() {
 
 	s2lp_config_t s2lpConf;
 	s2lp_loadConfiguration(&s2lpConf);
+
+	s2lpConf.rcz=2;
 	s2lp_printConfig(&s2lpConf);
 
 	sigfox_init(&s2lpConf);
