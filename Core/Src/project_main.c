@@ -95,8 +95,6 @@ void project_setup() {
 
 	s2lp_config_t s2lpConf;
 	s2lp_loadConfiguration(&s2lpConf);
-
-	s2lpConf.rcz=2;
 	s2lp_printConfig(&s2lpConf);
 
 	sigfox_init(&s2lpConf);
