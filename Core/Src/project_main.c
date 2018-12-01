@@ -32,14 +32,9 @@
 #include <it_sdk/logger/logger.h>
 #include <it_sdk/sched/scheduler.h>
 #include <it_sdk/statemachine/statemachine.h>
+#include <it_sdk/sigfox/sigfox.h>
 #include <it_sdk/eeprom/eeprom.h>
-#include <drivers/s2lp/s2lp.h>
-#include <drivers/sigfox/sigfox_helper.h>
-#include <drivers/eeprom/m95640/m95640.h>
-#include <drivers/sigfox/sigfox_api.h>
 
-
-#include <it_sdk/time/timer.h>
 
 void loadConfig() {
 	log_debug("In loadConfig \r\n");
@@ -87,22 +82,37 @@ void project_setup() {
 
 	log_info("temp : %d\r\n",(int)adc_getTemperature());
 
-	eeprom_m95640_hwInit();
-	s2lp_hwInit();
 
-	eeprom_m95640_init(&ITSDK_DRIVERS_M95640_SPI);
-	s2lp_init();
+	itsdk_sigfox_setup();
 
-	s2lp_config_t s2lpConf;
-	s2lp_loadConfiguration(&s2lpConf);
-	s2lp_printConfig(&s2lpConf);
-
-	sigfox_init(&s2lpConf);
-
+	//s2lp_printConfig();
 
 	uint8_t f[12] = { 0,1,2,3,4,5,6,7,8,9,10,11 };
 	uint8_t r[8] = {0};
-	uint16_t ret = SIGFOX_API_send_frame(f,4,r,2,1);
+
+	int16_t rssi = 1000;
+	uint16_t seqId = 0;
+	itsdk_sigfox_getLastRssi(&rssi);
+	log_info("Rssi %d\r\n",(int)rssi);
+	itsdk_sigfox_getLastSeqId(&seqId);
+	log_info("SeqId %d\r\n",(int)seqId);
+	/*
+	itsdk_sigfox_sendOob(
+			SIGFOX_OOB_SERVICE,
+			SIGFOX_SPEED_DEFAULT,
+			SIGFOX_POWER_DEFAULT
+	);
+
+	itsdk_delayMs(5000);
+
+	itsdk_sigfox_sendOob(
+			SIGFOX_OOB_RC_SYNC,
+			SIGFOX_SPEED_DEFAULT,
+			SIGFOX_POWER_DEFAULT
+	);
+*/
+
+	itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendBit(true,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,true,r);
 	log_info("ret : [");
 	for (int i=0 ; i < 8 ; i++) {
 		log_info("%02X ",r[i]);
@@ -110,6 +120,29 @@ void project_setup() {
 	log_info(" ]\r\n");
 	log_info("Returned code : %04X\r\n",ret);
 
+	itsdk_sigfox_getLastRssi(&rssi);
+	log_info("Rssi %d\r\n",(int)rssi);
+	itsdk_sigfox_getLastSeqId(&seqId);
+	log_info("SeqId %d\r\n",(int)seqId);
+
+	uint8_t pac[8];
+	uint32_t deviceId;
+	itsdk_sigfox_getInitialPac(pac);
+	itsdk_sigfox_getDeviceId(&deviceId);
+	s2lp_sigfox_search4key(deviceId, pac);
+
+/*
+	itsdk_delayMs(5000);
+
+	ret = itsdk_sigfox_sendFrame(f,4,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_NONE,true,r);
+
+	log_info("ret : [");
+	for (int i=0 ; i < 8 ; i++) {
+		log_info("%02X ",r[i]);
+	}
+	log_info(" ]\r\n");
+	log_info("Returned code : %04X\r\n",ret);
+*/
 	while(1){
 		log_info(".");
 		itsdk_delayMs(1000);

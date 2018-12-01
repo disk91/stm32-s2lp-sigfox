@@ -57,6 +57,7 @@
 #define ITSDK_LOGGER_MODULE			( \
 									  __LOG_MOD_STIMER \
 									| __LOG_MOD_LOWSIGFOX \
+									| __LOG_MOD_SIGFOX \
 									)										// list the module to be activated in log see config_defines.h
 
 #define ITSDK_LOWPOWER_MOD			( __LOWPWR_MODE_STOP \
