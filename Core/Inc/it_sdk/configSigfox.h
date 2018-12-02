@@ -41,7 +41,9 @@
 // | SDK SETTING                   | USER SELECTED VALUE                  | SETTING DESCRIPTION                   |
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +---------COMMON SETTINGS-------|--------------------------------------|---------------------------------------|
-
+#define ITSDK_SIGFOX_ENCRYPTION		(   __SIGFOX_ENCRYPT_AESCTR \
+									  | __SIGFOX_ENCRYPT_SPECK \
+									)										// Encryption code activated
 
 // +---------------S2LP------------|--------------------------------------|---------------------------------------|
 #if ITSDK_SIGFOX_LIB == __SIGFOX_S2LP
