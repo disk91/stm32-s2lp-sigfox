@@ -97,7 +97,6 @@
 									  0x00, 0x00, 0x00, 0x00, \
 									  0x00, 0x00, 0x00, 0x00 }				// The device AUX when NVM_SOURCE is HEADERS
 
-#define ITSDK_SIGFOX_PROTECT_KEY	0xA7459BC3								// A random value used to protect the SIGFOX KEY (better than nothing)
 #endif
 // +-------------OTHERS------------|--------------------------------------|---------------------------------------|
 
