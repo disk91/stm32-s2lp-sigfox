@@ -35,36 +35,62 @@
 #include <it_sdk/sigfox/sigfox.h>
 #include <it_sdk/eeprom/eeprom.h>
 
+#define VERSION 0x02
+struct conf {
+		uint8_t			version;
+		uint32_t		sharedkey;		// sigfox aes-ctr shared key (protected)
+		uint8_t			nonce;			// sigfox aes-ctr current nonce
+} s_conf;
 
 void loadConfig() {
-	log_debug("In loadConfig \r\n");
-
-	struct conf {
-		uint8_t	v1;
-		uint16_t v2;
-		uint32_t v3;
-	} s_conf;
 
 	uint8_t v;
-	if ( ! eeprom_read(&s_conf, sizeof(s_conf), 1,&v) ) {
-		log_debug("Flashing\r\n");
-		s_conf.v1 = 10;
-		s_conf.v2 = 0xA5A5;
-		s_conf.v3 = 0xFF5AA5FF;
-		eeprom_write(&s_conf, sizeof(s_conf), 1);
+	if ( ! eeprom_read(&s_conf, sizeof(s_conf), VERSION,&v) ) {
+		log_info("Flash the initial configuration\r\n");
+		s_conf.version 		= 0x02;
+		s_conf.sharedkey	= ITSDK_SIGFOX_SHAREDKEY;
+		s_conf.nonce		= ITSDK_SIGFOX_INITALNONCE;
+		eeprom_write(&s_conf, sizeof(s_conf), VERSION);
 	} else {
-		log_debug("Load version %d\r\n",v);
-		log_debug("v2 : %0X\r\n",s_conf.v2);
+		log_info("Loaded version %d\r\n",v);
 	}
 }
 
-uint8_t led = GPIO_PIN_SET;
-void task() {
-	log_debug("In task\r\n");
-	led = (led==GPIO_PIN_SET)?GPIO_PIN_RESET:GPIO_PIN_SET;
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin,led);
 
-	log_info("time is %d\r\n",(uint32_t)itsdk_time_get_ms());
+/**
+ * Return current nonce - this function is used in sigfox library with AES encryption
+ */
+itsdk_sigfox_init_t itsdk_sigfox_eas_getNonce(uint8_t * nonce) {
+	*nonce = s_conf.nonce;
+	return SIGFOX_INIT_SUCESS;
+}
+
+/**
+ * Return current sharedKey - this function is used in sigfox library with AES encryption
+ */
+itsdk_sigfox_init_t itsdk_sigfox_eas_getSharedKey(uint32_t * sharedKey) {
+	*sharedKey = s_conf.sharedkey;
+	return SIGFOX_INIT_SUCESS;
+}
+
+
+struct state {
+	uint8_t 	led;
+	uint32_t  	loops;
+} s_state;
+
+void initState() {
+	s_state.led = GPIO_PIN_SET;
+	s_state.loops = 0;
+}
+
+/**
+ * Cycling task every 2 seconds
+ */
+void task() {
+	s_state.led = (s_state.led==GPIO_PIN_SET)?GPIO_PIN_RESET:GPIO_PIN_SET;
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin,s_state.led);
+	//log_info("time is %d",(uint32_t)itsdk_time_get_ms());
 }
 
 
@@ -75,20 +101,24 @@ void project_setup() {
 	log_info("Reset : %d\r\n",itsdk_getResetCause());
 	itsdk_cleanResetCause();
 
-	HAL_Delay(2000);
-
+	// Init at boot time
 	loadConfig();
+	initState();
+
+	// Misc init
 	itsdk_sigfox_setup();
 
+	// Send a Sigfox Frame
 	uint8_t f[12] = { 0,1,2,3,4,5,6,7,8,9,10,11 };
 	uint8_t r[8] = {0};
-	itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,4,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_NONE,true,r);
+	itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,4,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_AESCTR,true,r);
 
 	itdt_sched_registerSched(2000,ITSDK_SCHED_CONF_IMMEDIATE, &task);
 }
 
 void project_loop() {
-
-
+	uint8_t t[4] = { '/','|','\\','-'};
+	log_info("\r%c ",t[s_state.loops & 3]);
+	s_state.loops++;
 }
 
