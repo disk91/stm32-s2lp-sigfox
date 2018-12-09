@@ -111,7 +111,7 @@ void project_setup() {
 	// Send a Sigfox Frame
 	uint8_t f[12] = { 0,1,2,3,4,5,6,7,8,9,10,11 };
 	uint8_t r[8] = {0};
-	itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,4,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_AESCTR,true,r);
+	itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,4,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_AESCTR |SIGFOX_ENCRYPT_SPECK ,false,r);
 
 	itdt_sched_registerSched(2000,ITSDK_SCHED_CONF_IMMEDIATE, &task);
 }

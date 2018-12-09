@@ -48,6 +48,11 @@
 																			// Shared Key for CTR generation and SPECK
 #define ITSDK_SIGFOX_INITALNONCE	( 0x25 )								// CHANGE ME
 																			// Initial value for Nonce used for AES128-CRT
+#define ITSDK_SIGFOX_SPECKKEY		(   (uint64_t)0xEF583AB7A57834BC  \
+									  ^ (  (uint64_t)ITSDK_PROTECT_KEY \
+									     | ((uint64_t)ITSDK_PROTECT_KEY << 32)) \
+									)										// CHANGE ME
+																			// Shared Key for SPECK32/64 Encryption
 
 // +---------------S2LP------------|--------------------------------------|---------------------------------------|
 #if ITSDK_SIGFOX_LIB == __SIGFOX_S2LP
