@@ -44,6 +44,15 @@
 #define ITSDK_SIGFOX_ENCRYPTION		(   __SIGFOX_ENCRYPT_AESCTR \
 									  | __SIGFOX_ENCRYPT_SPECK \
 									)										// Encryption code activated
+#define ITSDK_SIGFOX_AES_SHAREDKEY	( 0xAE632397 ^ ITSDK_PROTECT_KEY )      // CHANGE ME
+																			// Shared Key for CTR generation
+#define ITSDK_SIGFOX_AES_INITALNONCE ( 0x25 )								// CHANGE ME
+																			// Initial value for Nonce used for AES128-CRT
+#define ITSDK_SIGFOX_SPECKKEY		(   (uint64_t)0xEF583AB7A57834BC  \
+									  ^ (  (uint64_t)ITSDK_PROTECT_KEY \
+									     | ((uint64_t)ITSDK_PROTECT_KEY << 32)) \
+									)										// CHANGE ME
+																			// Shared Key for SPECK32/64 Encryption
 
 // +---------------S2LP------------|--------------------------------------|---------------------------------------|
 #if ITSDK_SIGFOX_LIB == __SIGFOX_S2LP
@@ -92,12 +101,12 @@
 									  0x00, 0x00, 0x00, 0x00, \
 									  0x00, 0x00, 0x00, 0x00, \
 									  0x00, 0x00, 0x00, 0x00 }				// The device KEY when NVM_SOURCE is HEADERS
+																			// The Key is in clear here
 #define ITSDK_SIGFOX_AUX			{ 0x00, 0x00, 0x00, 0x00, \
 									  0x00, 0x00, 0x00, 0x00, \
 									  0x00, 0x00, 0x00, 0x00, \
 									  0x00, 0x00, 0x00, 0x00 }				// The device AUX when NVM_SOURCE is HEADERS
 
-#define ITSDK_SIGFOX_PROTECT_KEY	0xA7459BC3								// A random value used to protect the SIGFOX KEY (better than nothing)
 #endif
 // +-------------OTHERS------------|--------------------------------------|---------------------------------------|
 
