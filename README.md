@@ -11,6 +11,9 @@ See here : https://www.disk91.com/?p=3388
 ### Step 2
 * Send a Sigfox Frame - see Tag/Release STEP2
 
+### Step 3
+* Send an encrypted Sigfox Frame with AES + SPECK32 encryption - see Tag/Release STEP3
+
 The project have different tag for the different step of realization.
 
 # Installation
@@ -25,7 +28,6 @@ The Cube MX configuration is provided in the project.
 Some important key point for custom confguration
 - EXTI interrupt needs to be activated
 - S2LP/GPIO3 -> PC0 have a pull-up 
-
 
 
 # License

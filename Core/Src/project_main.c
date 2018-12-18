@@ -35,10 +35,11 @@
 #include <it_sdk/sigfox/sigfox.h>
 #include <it_sdk/eeprom/eeprom.h>
 
-#define VERSION 0x02
+#define VERSION 0x03
 struct conf {
 		uint8_t			version;
-		uint32_t		sharedkey;		// sigfox aes-ctr shared key (protected)
+		uint32_t		aesSharedkey;	// sigfox aes-ctr shared key (protected)
+		uint64_t		speckSharedkey; // sigfox speck shared key (protected)
 		uint8_t			nonce;			// sigfox aes-ctr current nonce
 } s_conf;
 
@@ -47,9 +48,10 @@ void loadConfig() {
 	uint8_t v;
 	if ( ! eeprom_read(&s_conf, sizeof(s_conf), VERSION,&v) ) {
 		log_info("Flash the initial configuration\r\n");
-		s_conf.version 		= 0x02;
-		s_conf.sharedkey	= ITSDK_SIGFOX_SHAREDKEY;
-		s_conf.nonce		= ITSDK_SIGFOX_INITALNONCE;
+		s_conf.version 		  = VERSION;
+		s_conf.aesSharedkey	  = ITSDK_SIGFOX_AES_SHAREDKEY;
+		s_conf.speckSharedkey = ITSDK_SIGFOX_SPECKKEY;
+		s_conf.nonce		  = ITSDK_SIGFOX_AES_INITALNONCE;
 		eeprom_write(&s_conf, sizeof(s_conf), VERSION);
 	} else {
 		log_info("Loaded version %d\r\n",v);
@@ -69,10 +71,17 @@ itsdk_sigfox_init_t itsdk_sigfox_eas_getNonce(uint8_t * nonce) {
  * Return current sharedKey - this function is used in sigfox library with AES encryption
  */
 itsdk_sigfox_init_t itsdk_sigfox_eas_getSharedKey(uint32_t * sharedKey) {
-	*sharedKey = s_conf.sharedkey;
+	*sharedKey = s_conf.aesSharedkey;
 	return SIGFOX_INIT_SUCESS;
 }
 
+/**
+ * Return current speck sharedKey - this function is used in sigfox library with Speck encryption
+ */
+itsdk_sigfox_init_t itsdk_sigfox_speck_getMasterKey(uint64_t * masterKey) {
+	*masterKey = s_conf.speckSharedkey;
+	return SIGFOX_INIT_SUCESS;
+}
 
 struct state {
 	uint8_t 	led;
@@ -108,8 +117,17 @@ void project_setup() {
 	// Misc init
 	itsdk_sigfox_setup();
 
+	uint8_t mk[16];
+	itsdk_sigfox_eas_getMasterKey(mk);
+	itsdk_encrypt_unCifferKey(mk,16);
+	log_info("K : [ ");
+	for ( int i = 0 ; i < 16 ; i++ ) {
+		log_info("%02X ",mk[i]);
+	}
+	log_info("]\r\n");
+
 	// Send a Sigfox Frame
-	uint8_t f[12] = { 0,1,2,3,4,5,6,7,8,9,10,11 };
+	uint8_t f[12] = { 'a','b','c','d',4,5,6,7,8,9,10,11 };
 	uint8_t r[8] = {0};
 	itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,4,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_AESCTR |SIGFOX_ENCRYPT_SPECK ,false,r);
 

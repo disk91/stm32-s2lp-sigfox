@@ -44,9 +44,9 @@
 #define ITSDK_SIGFOX_ENCRYPTION		(   __SIGFOX_ENCRYPT_AESCTR \
 									  | __SIGFOX_ENCRYPT_SPECK \
 									)										// Encryption code activated
-#define ITSDK_SIGFOX_SHAREDKEY		( 0xAE632397 ^ ITSDK_PROTECT_KEY )      // CHANGE ME
-																			// Shared Key for CTR generation and SPECK
-#define ITSDK_SIGFOX_INITALNONCE	( 0x25 )								// CHANGE ME
+#define ITSDK_SIGFOX_AES_SHAREDKEY	( 0xAE632397 ^ ITSDK_PROTECT_KEY )      // CHANGE ME
+																			// Shared Key for CTR generation
+#define ITSDK_SIGFOX_AES_INITALNONCE ( 0x25 )								// CHANGE ME
 																			// Initial value for Nonce used for AES128-CRT
 #define ITSDK_SIGFOX_SPECKKEY		(   (uint64_t)0xEF583AB7A57834BC  \
 									  ^ (  (uint64_t)ITSDK_PROTECT_KEY \
