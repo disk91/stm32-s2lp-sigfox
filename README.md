@@ -14,6 +14,9 @@ See here : https://www.disk91.com/?p=3388
 ### Step 3
 * Send an encrypted Sigfox Frame with AES + SPECK32 encryption - see Tag/Release STEP3
 
+### Step 4
+* Send a Sigfox encrypted Frame using the Sigfox AES-CTR feature - see Tag/Release STEP4
+
 The project have different tag for the different step of realization.
 
 # Installation

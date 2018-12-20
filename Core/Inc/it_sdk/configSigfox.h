@@ -44,7 +44,7 @@
 #if ITSDK_WITH_SIGFOX_LIB == 1
 #define ITSDK_SIGFOX_ENCRYPTION		( /*  __SIGFOX_ENCRYPT_AESCTR */\
 									  /*| __SIGFOX_ENCRYPT_SPECK */\
-									  /* | */ __SIGFOX_ENCRYPT_SIGFOX \
+									  /* |*/  __SIGFOX_ENCRYPT_SIGFOX \
 									)										// Encryption code activated
 #define ITSDK_SIGFOX_AES_SHAREDKEY	( 0xAE632397 ^ ITSDK_PROTECT_KEY )      // CHANGE ME
 																			// Shared Key for CTR generation

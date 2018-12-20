@@ -102,12 +102,6 @@ void task() {
 	//log_info("time is %d",(uint32_t)itsdk_time_get_ms());
 }
 
-/*
-void __wrap_SIGFOX_INT_get_device_id_and_payload_encryption_flag ( int16_t channel ) {
- tfp_printf("[info] in function SetChannel %d \r\n",channel);
- __real_TD_SIGFOX_SetChannel( channel );
-}
-*/
 
 void project_setup() {
 	log_init(ITSDK_LOGGER_CONF);
@@ -126,22 +120,16 @@ void project_setup() {
 	itsdk_sigfox_getSigfoxLibVersion(&strVersion);
 	log_info("Sigfox Lib Version : %s\r\n",strVersion);
 
-	uint8_t mk[16];
-	itsdk_sigfox_aes_getMasterKey(mk);
-	itsdk_encrypt_unCifferKey(mk,16);
-	log_info("K : [ ");
-	for ( int i = 0 ; i < 16 ; i++ ) {
-		log_info("%02X ",mk[i]);
-	}
-	log_info("]\r\n");
+	// Just to ensure the CycleID is in sync between device and sigfox backend
+	// this should not be sent on every frame but only on regular basis.
+	itsdk_sigfox_sendOob(SIGFOX_OOB_RC_SYNC,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT);
 
 	// Send a Sigfox Frame
 	uint8_t f[12] = { 'a','b','c','d',4,5,6,7,8,9,10,11 };
-	//uint8_t f[12] = { 0,0,0,0,0,0,0,0,0,0,0,0 };
 	uint8_t r[8] = {0};
-	//itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,4,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_AESCTR |SIGFOX_ENCRYPT_SPECK ,false,r);
+	itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,12,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_SIGFOX ,false,r);
 
-	itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,4,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_SIGFOX ,false,r);
+	//itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,4,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_AESCTR |SIGFOX_ENCRYPT_SPECK ,false,r);
 
 	itdt_sched_registerSched(2000,ITSDK_SCHED_CONF_IMMEDIATE, &task);
 }
