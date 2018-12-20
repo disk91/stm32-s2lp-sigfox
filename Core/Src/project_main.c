@@ -62,7 +62,7 @@ void loadConfig() {
 /**
  * Return current nonce - this function is used in sigfox library with AES encryption
  */
-itsdk_sigfox_init_t itsdk_sigfox_eas_getNonce(uint8_t * nonce) {
+itsdk_sigfox_init_t itsdk_sigfox_aes_getNonce(uint8_t * nonce) {
 	*nonce = s_conf.nonce;
 	return SIGFOX_INIT_SUCESS;
 }
@@ -70,7 +70,7 @@ itsdk_sigfox_init_t itsdk_sigfox_eas_getNonce(uint8_t * nonce) {
 /**
  * Return current sharedKey - this function is used in sigfox library with AES encryption
  */
-itsdk_sigfox_init_t itsdk_sigfox_eas_getSharedKey(uint32_t * sharedKey) {
+itsdk_sigfox_init_t itsdk_sigfox_aes_getSharedKey(uint32_t * sharedKey) {
 	*sharedKey = s_conf.aesSharedkey;
 	return SIGFOX_INIT_SUCESS;
 }
@@ -116,20 +116,20 @@ void project_setup() {
 
 	// Misc init
 	itsdk_sigfox_setup();
+	uint8_t * strVersion;
+	itsdk_sigfox_getSigfoxLibVersion(&strVersion);
+	log_info("Sigfox Lib Version : %s\r\n",strVersion);
 
-	uint8_t mk[16];
-	itsdk_sigfox_eas_getMasterKey(mk);
-	itsdk_encrypt_unCifferKey(mk,16);
-	log_info("K : [ ");
-	for ( int i = 0 ; i < 16 ; i++ ) {
-		log_info("%02X ",mk[i]);
-	}
-	log_info("]\r\n");
+	// Just to ensure the CycleID is in sync between device and sigfox backend
+	// this should not be sent on every frame but only on regular basis.
+	itsdk_sigfox_sendOob(SIGFOX_OOB_RC_SYNC,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT);
 
 	// Send a Sigfox Frame
 	uint8_t f[12] = { 'a','b','c','d',4,5,6,7,8,9,10,11 };
 	uint8_t r[8] = {0};
-	itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,4,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_AESCTR |SIGFOX_ENCRYPT_SPECK ,false,r);
+	itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,12,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_SIGFOX ,false,r);
+
+	//itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,4,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_AESCTR |SIGFOX_ENCRYPT_SPECK ,false,r);
 
 	itdt_sched_registerSched(2000,ITSDK_SCHED_CONF_IMMEDIATE, &task);
 }
