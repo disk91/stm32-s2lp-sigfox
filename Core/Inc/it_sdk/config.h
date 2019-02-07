@@ -33,17 +33,24 @@
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // | SDK SETTING                   | USER SELECTED VALUE                  | SETTING DESCRIPTION                   |
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#define ITSDK_PLATFORM 				__PLATFORM_STM32L0x3					// Hardware platform selection
+#define ITSDK_PLATFORM 				__PLATFORM_STM32L0						// Hardware platform selection
 #define ITSDK_DEVICE				__DEVICE_STM32L053R8					// Specific device
 #define ITSDK_RAM_SIZE				2048									// RAM Memory size
 #define ITSDK_WITH_UART				( __UART_USART2 | __UART_LPUART1 )		// Use LPUART1 and USART2 for debug
 #define ITSDK_WITH_RTC				__RTC_ENABLED							// The Rtc is usd in the firmware
-#define ITSDK_WITH_CLK_ADJUST		1										// The RTC (and wtachdog) is calibrated
+#define ITSDK_RTC_CLKFREQ			37000									// RTC Clock frequency
+#define ITSDK_WITH_CLK_ADJUST		__ENABLE								// The RTC (and wtachdog) is calibrated
+#define ITSDK_CLK_BEST_SOURCE		__CLK_BEST_SRC_CLK						// The RTC is the most accurate clk source to ADJUST Others
 #define ITSDK_CLK_CORRECTION		1200									// correct clock with 1200 o/oo (+20%) of the ticks (used when clk_adjust = 0)
 #define ITSDK_WITH_ADC				__ADC_ENABLED							// Use of Adc (includes the structures)
 #define ITSDK_ADC1_PIN				14										// Map the channel for ADC on PIN 14 (PA0)
-#define ITSDK_VDD_MV				3300									// VDD value in cV
+#define ITSDK_VDD_MV				3300									// VDD value in mV
+#define ITSDK_VBAT_MIN				2000									// MIN value for VBAT in mv
+#define ITSDK_VBAT_MAX				3300									// MAX value for VBAT in mv
+#define ITSDK_VBAT_ADC_PIN			-1										// ADC pin used to measure VBAT (if -1 assume VBAT = VCC)
 #define ITSDK_WITH_SPI				__SPI_ENABLED							// Use SPI (inludes the strutures)
+#define ITSDK_SPI_HANDLER_TYPE		SPI_HandleTypeDef						// The name of the Spi structure to be used for the targeted MCU
+#define ITSDK_SPI_TIMEOUT			100										// SPI transaction timeout in ms
 #define ITSDK_WITH_HW_TIMER			__TIMER_ENABLED							// Use Hardware Timer
 #define ITSDK_HW_TIMER1_HANDLE		htim21									// Timer handler to be used as primary timer
 #define ITSDK_HW_TIMER1_ID			21										// Timer hadware 1 - id/name
@@ -103,7 +110,7 @@
 
 
 
-#if ITSDK_PLATFORM == __PLATFORM_STM32L0x1  || ITSDK_PLATFORM == __PLATFORM_STM32L0x3
+#if ITSDK_PLATFORM == __PLATFORM_STM32L0
 	#include <stm32l_sdk/config.h>
 	#include "stm32l0xx_hal.h"
 #endif
