@@ -127,8 +127,14 @@ void project_setup() {
 	// Send a Sigfox Frame
 	uint8_t f[12] = { 'a','b','c','d',4,5,6,7,8,9,10,11 };
 	uint8_t r[8] = {0};
-	itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,12,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_SIGFOX ,false,r);
 
+	itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,12,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,PAYLOAD_ENCRYPT_NONE ,false,r);
+
+	// Sigfox encryption requires to activate the encryption on Sigfox Backend
+	// Then to activate the __PAYLOAD_ENCRYPT_SIGFOX in the configSigfox.h
+	//itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,12,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,PAYLOAD_ENCRYPT_SIGFOX ,false,r);
+
+	// Custom encryption can be activated for End to End encryption
 	//itdsk_sigfox_txrx_t ret = itsdk_sigfox_sendFrame(f,4,2,SIGFOX_SPEED_DEFAULT,SIGFOX_POWER_DEFAULT,SIGFOX_ENCRYPT_AESCTR |SIGFOX_ENCRYPT_SPECK ,false,r);
 
 	itdt_sched_registerSched(2000,ITSDK_SCHED_CONF_IMMEDIATE, &task);
