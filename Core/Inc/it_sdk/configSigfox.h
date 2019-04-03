@@ -42,10 +42,10 @@
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +------------SIGFOX-------------|--------------------------------------|---------------------------------------|
 #if ITSDK_WITH_SIGFOX_LIB == 1
-#define ITSDK_SIGFOX_ENCRYPTION		(  /*__PAYLOAD_ENCRYPT_NONE    | */ \
-									   __PAYLOAD_ENCRYPT_AESCTR  | \
-									   __PAYLOAD_ENCRYPT_SPECK   | \
-									   __PAYLOAD_ENCRYPT_SIGFOX   \
+#define ITSDK_SIGFOX_ENCRYPTION		(   __PAYLOAD_ENCRYPT_NONE        /* minimal value */ 						  \
+									  | __PAYLOAD_ENCRYPT_AESCTR      /* enable the end 2 end EAS encryption*/ 	  \
+									  | __PAYLOAD_ENCRYPT_SPECK       /* enable the end 2 end Speck encryption */ \
+								 /*   | __PAYLOAD_ENCRYPT_SIGFOX */   /* enable the sigfox native encryption */   \
 									)										// Encryption code activated
 #define ITSDK_SIGFOX_AES_SHAREDKEY	( 0xAE632397 ^ ITSDK_PROTECT_KEY )      // CHANGE ME
 																			// Shared Key for CTR generation

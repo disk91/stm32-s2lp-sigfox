@@ -19,6 +19,10 @@ See here : https://www.disk91.com/?p=3388
 
 The project have different tag for the different step of realization.
 
+### Master branch
+The master branch contains a working version of Sigfox communication working with [Disk91 STM32 IoT SDK repository](https://github.com/disk91/stm32-it-sdk) version >= 1.4.2
+
+
 # Installation
 
 Clone this repository and open it with AC6 environment [See here on how to install it](https://www.disk91.com/2018/technology/hardware/getting-started-with-nucleo32-stm32l031/)
