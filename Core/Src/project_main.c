@@ -49,9 +49,9 @@ void loadConfig() {
 	if ( ! eeprom_read(&s_conf, sizeof(s_conf), VERSION,&v) ) {
 		log_info("Flash the initial configuration\r\n");
 		s_conf.version 		  = VERSION;
-		s_conf.aesSharedkey	  = ITSDK_SIGFOX_AES_SHAREDKEY;
-		s_conf.speckSharedkey = ITSDK_SIGFOX_SPECKKEY;
-		s_conf.nonce		  = ITSDK_SIGFOX_AES_INITALNONCE;
+		s_conf.aesSharedkey	  = ITSDK_ENCRYPT_AES_SHAREDKEY;
+		s_conf.speckSharedkey = ITSDK_ENCRYPT_SPECKKEY;
+		s_conf.nonce		  = ITSDK_ENCRYPT_AES_INITALNONCE;
 		eeprom_write(&s_conf, sizeof(s_conf), VERSION);
 	} else {
 		log_info("Loaded version %d\r\n",v);

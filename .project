@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>STM32_Sigfox_ItSdk</name>
-	<comment />
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -28,7 +28,12 @@
 		<link>
 			<name>ItSdk</name>
 			<type>2</type>
-			<location>PARENT-1-PROJECT_LOC/ItSdk</location>
+			<locationURI>PARENT-1-PROJECT_LOC/ItSdk</locationURI>
+		</link>
+		<link>
+			<name>stm32-it-sdk</name>
+			<type>2</type>
+			<location>/Users/Paul 1/Sites/workspace/stm32-it-sdk</location>
 		</link>
 	</linkedResources>
 </projectDescription>

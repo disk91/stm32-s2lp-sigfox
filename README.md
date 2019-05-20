@@ -20,7 +20,7 @@ See here : https://www.disk91.com/?p=3388
 The project have different tag for the different step of realization.
 
 ### Master branch
-The master branch contains a working version of Sigfox communication working with [Disk91 STM32 IoT SDK repository](https://github.com/disk91/stm32-it-sdk) version >= 1.4.2
+The master branch contains a working version of Sigfox communication working with [Disk91 STM32 IoT SDK repository](https://github.com/disk91/stm32-it-sdk) version >= 1.5.0
 
 
 # Installation

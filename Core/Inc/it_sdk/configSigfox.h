@@ -47,14 +47,7 @@
 									  | __PAYLOAD_ENCRYPT_SPECK       /* enable the end 2 end Speck encryption */ \
 								 /*   | __PAYLOAD_ENCRYPT_SIGFOX */   /* enable the sigfox native encryption */   \
 									)										// Encryption code activated
-#define ITSDK_SIGFOX_AES_SHAREDKEY	( 0xAE632397 ^ ITSDK_PROTECT_KEY )      // CHANGE ME
-																			// Shared Key for CTR generation
-#define ITSDK_SIGFOX_AES_INITALNONCE ( 0x25 )								// CHANGE ME
-																			// Initial value for Nonce used for AES128-CRT
-#define ITSDK_SIGFOX_SPECKKEY		(   (uint64_t)0xEF583AB7A57834BC  \
-									  ^ (  (uint64_t)ITSDK_PROTECT_KEY \
-									     | ((uint64_t)ITSDK_PROTECT_KEY << 32)) \
-									)										// CHANGE ME
+
 																			// Shared Key for SPECK32/64 Encryption
 #define ITSDK_SIGFOX_MEM_SIZE		256										// Static memory allocated to sigfox
 #define ITSDK_SIGFOX_NVM_SOURCE		__SFX_NVM_M95640						// where the non volatile information are stored
@@ -104,6 +97,8 @@
 #define ITSDK_S2LP_CNF_BAND			3
 #define ITSDK_S2LP_CNF_FREQ			50000000
 #define ITSDK_S2LP_CNF_OFFSET		0
+
+#define ITSDK_SIGFOX_EXTENSIONS	    __SIGFOX_MONARCH			   		  // Customize the sigfox lib (be careful as there is a link with precompiled library)
 
 #endif //__SIGFOX_S2LP
 

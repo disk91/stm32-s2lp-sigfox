@@ -72,10 +72,12 @@
 									| __LOG_MOD_LOWSIGFOX \
 									| __LOG_MOD_SIGFOX \
 									)										// list the module to be activated in log see config_defines.h
-#define ITSDK_WITH_ERROR_RPT		__DISABLE								// Enable the Error reporting code. The allow to store error code in the EEPROM
-#define ITSDK_ERROR_USE_EPROM		__DISABLE								//  Error reports are stored in the EEPROM
+
+#define ITSDK_WITH_ERROR_RPT		__ENABLE								// Enable the Error reporting code. The allow to store error code in the EEPROM
+#define ITSDK_ERROR_USE_EPROM		__ENABLE								//  Error reports are stored in the EEPROM
 #define ITSDK_WITH_ERROR_EXTENTION	__DISABLE								//  Add an application extension for error code in configError.h file
-#define ITSDK_ERROR_BLOCKS			0										//  Max number of error block / 1 block stores 1 error and needs 8 Byte for storage.
+#define ITSDK_ERROR_BLOCKS			64										//  Max number of error block / 1 block stores 1 error and needs 8 Byte for storage.
+
 
 #define ITSDK_LOWPOWER_MOD			( __LOWPWR_MODE_STOP \
 									| __LOWPWR_MODE_WAKE_RTC \
@@ -162,6 +164,35 @@
 
 
 #define ITSDK_PROTECT_KEY			0xA7459BC3 	 	/* CHANGE ME */			// A random value used to protect the SIGFOX (and others) KEY in memory (better than nothing)
+
+#define ITSDK_DEFAULT_NETWORK		__ACTIV_NETWORK_SIGFOX					// Default network to activate
+
+
+#define ITSDK_ENCRYPT_AES_SHAREDKEY	( 0xAE632397 ^ ITSDK_PROTECT_KEY )      // CHANGE ME
+																			// Shared Key for CTR generation
+
+#define ITSDK_ENCRYPT_AES_INITALNONCE ( 0x25 )								// CHANGE ME
+																			// Initial value for Nonce used for AES128-CRT
+
+#define ITSDK_ENCRYPT_SPECKKEY		(   (uint64_t)0xEF583AB7A57834BC  \
+									  ^ (  (uint64_t)ITSDK_PROTECT_KEY \
+									     | ((uint64_t)ITSDK_PROTECT_KEY << 32)) \
+									)										// CHANGE ME
+																			// Shared Key for SPECK32/64 Encryption
+
+#define ITSDK_ENCRYPT_AES_MASTERKEYH (   (uint64_t)0x2B7E151628AED2A6  \
+									  ^ (  (uint64_t)ITSDK_PROTECT_KEY \
+									     | ((uint64_t)ITSDK_PROTECT_KEY << 32)) \
+									 )										// CHANGE ME
+																			// Static 16B key used as master key (8B HIGH)
+																			// for end to end encryption
+
+#define ITSDK_ENCRYPT_AES_MASTERKEYL (   (uint64_t)0xABF7158809CF4F3C  \
+									  ^ (  (uint64_t)ITSDK_PROTECT_KEY \
+									     | ((uint64_t)ITSDK_PROTECT_KEY << 32)) \
+									 )										// CHANGE ME
+																		    // Static 16B key used as master key (8B LOW)
+																		    // for end to end encryption
 
 
 
